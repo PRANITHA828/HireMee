@@ -103,7 +103,8 @@ export const login = async (req, res) => {
       httpOnly: true, // ✅ JS can't access it (protects from XSS)
       secure: process.env.NODE_ENV === "production", // true only on HTTPS
       sameSite: "lax", // prevent CSRF
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: 24 * 60 * 60 * 1000,
+      path: "/", // 1 day
     });
     // ✅ ADD ROLE COOKIE FOR MIDDLEWARE ACCESS
 
@@ -164,25 +165,26 @@ export const getMyProfile = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.cookie("token", "", {
+    res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // use HTTPS in production
       sameSite: "lax",
-      expires: new Date(0), // immediately expire
+      secure: process.env.NODE_ENV === "production",
+      path: "/", // 🔥 THIS IS THE FIX
     });
 
     return res.status(200).json({
       success: true,
-      message: "Logged out successfully.",
+      message: "Logged out successfully",
     });
   } catch (error) {
     console.error("Logout error:", error.message);
     return res.status(500).json({
       success: false,
-      message: "Server error during logout.",
+      message: "Server error during logout",
     });
   }
 };
+
 
 
 export const updateProfile = async (req, res) => {

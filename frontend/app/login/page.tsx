@@ -55,7 +55,9 @@ export default function LoginPage() {
 
       toast.success("Login Successful");
 
-      // ✅ ROLE-BASED REDIRECT (ONLY ONE PLACE)
+      
+
+     console.log("Redirect code reached");
       if (data.user.role === "recruiter") {
         router.replace("/companies");
       } else {

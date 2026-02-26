@@ -35,7 +35,7 @@ export default function PostJobPage() {
     const loadCompanies = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/v1/company/get",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/get`,
           {
             method: "GET",
             credentials: "include",
@@ -71,7 +71,7 @@ export default function PostJobPage() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/job/post",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/job/post`,
         {
           method: "POST",
           credentials: "include",

@@ -28,7 +28,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/v1/user/profile", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/profile`, {
           method: "GET",
           credentials: "include",
         });
@@ -70,7 +70,7 @@ export default function ProfilePage() {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/user/profile/update", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/profile/update`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

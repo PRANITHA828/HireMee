@@ -42,7 +42,7 @@ export default function CompanyDetailsPage() {
     const loadData = async () => {
       try {
         const companyRes = await fetch(
-          `http://localhost:5000/api/v1/company/get/${id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/get/${id}`,
           { credentials: "include" }
         );
 
@@ -50,7 +50,7 @@ export default function CompanyDetailsPage() {
         if (!companyRes.ok) throw new Error(companyData.message);
 
         const jobsRes = await fetch(
-          "http://localhost:5000/api/v1/job/getadminjobs",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/job/getadminjobs`,
           { credentials: "include" }
         );
 

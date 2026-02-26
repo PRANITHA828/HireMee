@@ -51,7 +51,7 @@ export default function JobDetailsPage() {
     try {
       // 1️⃣ Fetch job
       const jobRes = await fetch(
-        `http://localhost:5000/api/v1/job/get/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/job/get/${id}`,
         { credentials: "include" }
       );
       const jobData = await jobRes.json();
@@ -71,7 +71,7 @@ export default function JobDetailsPage() {
 
       // 2️⃣ Fetch applied jobs
       const appliedRes = await fetch(
-        "http://localhost:5000/api/v1/application/get",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/application/get`,
         { credentials: "include" }
       );
       const appliedData = await appliedRes.json();
@@ -103,7 +103,7 @@ export default function JobDetailsPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/application/apply/${job._id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/application/apply/${job._id}`,
         {
           method: "POST",
           credentials: "include",

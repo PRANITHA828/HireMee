@@ -34,7 +34,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchApplications = async () => {
-      const res = await fetch("http://localhost:5000/api/v1/application/get", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/application/get`, {
         method: "GET",
         credentials: "include",
       });

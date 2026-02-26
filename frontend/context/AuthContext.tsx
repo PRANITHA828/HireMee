@@ -44,7 +44,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const fetchUser = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/v1/user/profile",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/profile`,
           {
             method: "GET",
             credentials: "include",
@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   /* 🚪 LOGOUT (backend + frontend cleanup) */
   const logout = async () => {
     try {
-      await fetch("http://localhost:5000/api/v1/user/logout", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/logout`, {
         method: "GET",
         credentials: "include",
       });

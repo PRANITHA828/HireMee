@@ -37,7 +37,7 @@ export default function UpdateCompanyPage() {
     const loadCompany = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/v1/company/get/${id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/get/${id}`,
           {
             method: "GET",
             credentials: "include",
@@ -73,7 +73,7 @@ export default function UpdateCompanyPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/company/update/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/update/${id}`,
         {
           method: "PUT", // backend expects POST
           credentials: "include",

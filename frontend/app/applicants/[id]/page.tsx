@@ -39,7 +39,7 @@ export default function JobApplicantsPage() {
     const loadApplicants = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/v1/application/${id}/applicants`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/application/${id}/applicants`,
           {
             method: "GET",
             credentials: "include",
@@ -69,7 +69,7 @@ export default function JobApplicantsPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/application/status/${applicationId}/update`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/application/status/${applicationId}/update`,
         {
           method: "POST",
           credentials: "include",

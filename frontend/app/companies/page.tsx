@@ -22,7 +22,7 @@ export default function Page() {
 
   useEffect(() => {
     const loadCompanies = async () => {
-      const res = await fetch("http://localhost:5000/api/v1/company/get", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/company/get`, {
         method: "GET",
         credentials: "include",
       });

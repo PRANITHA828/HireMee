@@ -18,9 +18,13 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser())
 
 const corsOptions = {
-    origin:'http://localhost:3000',
-    credentials:true
-}
+    origin: [
+        "http://localhost:3000",
+        "https://hire-mee.vercel.app" 
+    ],
+    credentials: true
+};
+
 app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 5000;

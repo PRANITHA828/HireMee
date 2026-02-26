@@ -100,11 +100,11 @@ export const login = async (req, res) => {
 
     // 6️⃣ Send token inside secure cookie
     res.cookie("token", token, {
-      httpOnly: true, // ✅ JS can't access it (protects from XSS)
-      secure: process.env.NODE_ENV === "production", // true only on HTTPS
-      sameSite: "lax", // prevent CSRF
+      httpOnly: true, 
+      secure: true,          
+      sameSite: "none",      
       maxAge: 24 * 60 * 60 * 1000,
-      path: "/", // 1 day
+      path: "/",
     });
     // ✅ ADD ROLE COOKIE FOR MIDDLEWARE ACCESS
 

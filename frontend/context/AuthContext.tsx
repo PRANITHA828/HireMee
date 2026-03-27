@@ -26,6 +26,7 @@ interface AuthContextType {
   loading: boolean;
   login: (user: User) => void;
   logout: () => Promise<void>;
+  updateUser: (user: User) => void;
 }
 
 /* ================= CONTEXT ================= */
@@ -38,6 +39,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  const updateUser = (newUser: User) => {
+  setUser(newUser);
+};
 
   /* 🔁 Restore session on refresh */
   useEffect(() => {
@@ -87,7 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

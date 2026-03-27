@@ -20,7 +20,7 @@ export default function Header() {
   }, []);
 
   const handleLogout = async () => {
-    await logout();            // ✅ calls backend + clears user + redirects
+    await logout(); // ✅ calls backend + clears user + redirects
     setSidebarOpen(false);
   };
 
@@ -31,7 +31,7 @@ export default function Header() {
     <>
       <header
         className={`fixed w-full top-0 left-0 z-50 bg-transparent transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-md h-20" : "h-32 bg-blue-50"
+          isScrolled ? "bg-white shadow-md h-20" : " h-32"
         }`}
         style={{
           backgroundImage: !isScrolled
@@ -44,7 +44,7 @@ export default function Header() {
       >
         <div className="container mx-auto px-6 h-full flex justify-between items-center">
           {/* Logo */}
-          <Link href="/homee" className="flex items-center space-x-2">
+          <Link href="/home" className="flex items-center space-x-2">
             <Image
               src="https://webstrot.com/html/tabula/job/images/fav-icon.png"
               alt="Logo"
@@ -78,28 +78,29 @@ export default function Header() {
                 <Link href="/companies" className="hover:text-pink-500">
                   Companies
                 </Link>
-                
               </>
             )}
 
             {user?.role === "recruiter" && (
-             <Link
-  href="/post-job"
-  className="
-    px-6 py-2 rounded-full text-sm font-bold
-    bg-pink-600 text-white
-    border-2
-    transition-all duration-300
+              <Link
+                 href="/post-job"
+                className="
+                          px-6 py-2 rounded-full text-sm font-bold
+                         bg-pink-600 text-white
+                         border-2
+                        transition-all duration-300
 
-    hover:bg-transparent
-    hover:text-pink-600
-    hover:border-pink-600
-  "
->
-  POST A JOB
-</Link>
-
+                           hover:bg-transparent
+                              hover:text-pink-600
+                              hover:border-pink-600"
+              >
+                POST A JOB
+              </Link>
             )}
+
+            <Link href="/contact" className="hover:text-pink-500">
+              Contact Us
+            </Link>
 
             {user && (
               <Image
@@ -203,9 +204,6 @@ export default function Header() {
               Applied Jobs
             </Link>
           )}
-
-
-          
 
           <button
             onClick={handleLogout}

@@ -3,6 +3,7 @@ import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { useAuth } from "@/context/AuthContext";
 
 interface ProfileFormData {
   fullname: string;
@@ -23,6 +24,7 @@ export default function ProfilePage() {
   });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { updateUser } = useAuth();
 
   //  Fetch profile data
   useEffect(() => {
@@ -81,6 +83,7 @@ export default function ProfilePage() {
 
       if (res.ok && data.success) {
         setMessage("✅ Profile updated successfully!");
+        updateUser(data.user); 
         setTimeout(() => router.push("/profile"), 1000);
       } else {
         setMessage(`❌ ${data.message || "Update failed"}`);

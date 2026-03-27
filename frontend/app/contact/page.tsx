@@ -9,7 +9,7 @@ export default function ContactPage() {
       <div className="bg-gray-50 min-h-screen">
         {/* ✅ HERO SECTION */}
         <div
-          className="relative h-[220px] sm:h-[260px] md:h-[320px] flex items-center justify-center bg-cover bg-center"
+          className="relative h-55 sm:h-65 md:h-80 flex items-center justify-center bg-cover bg-center"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600')",

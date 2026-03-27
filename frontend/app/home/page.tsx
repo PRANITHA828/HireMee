@@ -8,6 +8,8 @@ import Header from "@/components/header";
 import HeroSection from "@/components/herosection";
 import CategorySection from "@/components/CategorySection";
 import Footer from "@/components/footer";
+import HowItWorks from "@/components/howitworks";
+import StatsSection from "@/components/StatsSection";
 
 export default function HomePage() {
   const { user, loading } = useAuth();
@@ -28,6 +30,8 @@ export default function HomePage() {
       <Header />
       <HeroSection />
       <CategorySection />
+      <HowItWorks/>
+      <StatsSection/>
       <Footer />
     </div>
   );

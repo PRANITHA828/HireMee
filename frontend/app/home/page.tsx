@@ -10,6 +10,7 @@ import CategorySection from "@/components/CategorySection";
 import Footer from "@/components/footer";
 import HowItWorks from "@/components/howitworks";
 import StatsSection from "@/components/StatsSection";
+import Loader from "@/components/loader";
 
 export default function HomePage() {
   const { user, loading } = useAuth();
@@ -24,6 +25,17 @@ export default function HomePage() {
 
   // ⏳ Avoid UI flash while checking auth
   if (loading || !user) return null;
+
+  if (loading)
+      return (
+        <>
+          <Header />
+          <div className="min-h-screen bg-white grid place-items-center text-lg">
+            <Loader />
+          </div>
+          <Footer />
+        </>
+      );
 
   return (
     <div>

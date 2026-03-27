@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Applicant {
   _id: string;
@@ -91,6 +92,8 @@ export default function JobApplicantsPage() {
     }
   };
 
+  
+
   return (
     <>
       <Header />
@@ -99,11 +102,7 @@ export default function JobApplicantsPage() {
         <div className="max-w-5xl mx-auto space-y-8">
 
           {/* LOADING */}
-          {loading && (
-            <p className="text-center text-gray-500">
-              Loading applicants…
-            </p>
-          )}
+          
 
           {/* JOB INFO */}
           {!loading && job && (

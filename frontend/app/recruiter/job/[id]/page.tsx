@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Job {
   _id: string;
@@ -131,13 +132,16 @@ export default function JobDetailsPage() {
   };
 
   /* ---------------- UI ---------------- */
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-lg">
-        Loading job details…
-      </div>
-    );
-  }
+  if (loading)
+      return (
+        <>
+          <Header />
+          <div className="min-h-screen bg-white grid place-items-center text-lg">
+            <Loader />
+          </div>
+          <Footer />
+        </>
+      );
 
   if (error) {
     return (

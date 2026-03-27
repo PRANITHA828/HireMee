@@ -63,7 +63,7 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8 text-gray-800 font-medium text-lg">
-            <Link href="/homee" className="hover:text-pink-500">
+            <Link href="/home" className="hover:text-pink-500">
               Home
             </Link>
 
@@ -74,16 +74,27 @@ export default function Header() {
             )}
 
             {user?.role === "recruiter" && (
-              <>
-                <Link href="/companies" className="hover:text-pink-500">
+              
+                <Link href="/recruiter/companies" className="hover:text-pink-500">
                   Companies
                 </Link>
-              </>
+              
             )}
 
             {user?.role === "recruiter" && (
+              
+                <Link href="/recruiter/admin-jobs" className="hover:text-pink-500">
+                  Admin-Jobs
+                </Link>
+            )}
+
+            <Link href="/contact" className="hover:text-pink-500">
+              Contact Us
+            </Link>
+
+            {user?.role === "recruiter" && (
               <Link
-                 href="/post-job"
+                 href="/recruiter/post-job"
                 className="
                           px-6 py-2 rounded-full text-sm font-bold
                          bg-pink-600 text-white
@@ -98,9 +109,7 @@ export default function Header() {
               </Link>
             )}
 
-            <Link href="/contact" className="hover:text-pink-500">
-              Contact Us
-            </Link>
+            
 
             {user && (
               <Image
@@ -129,7 +138,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden shadow-lg absolute w-full top-full p-4 space-y-4">
-            <Link href="/homee" onClick={() => setMenuOpen(false)}>
+            <Link href="/home" onClick={() => setMenuOpen(false)}>
               Home
             </Link>
 
@@ -140,7 +149,7 @@ export default function Header() {
             )}
 
             {user?.role === "recruiter" && (
-              <Link href="/post-job" onClick={() => setMenuOpen(false)}>
+              <Link href="/recruiter/post-job" onClick={() => setMenuOpen(false)}>
                 Post Job
               </Link>
             )}

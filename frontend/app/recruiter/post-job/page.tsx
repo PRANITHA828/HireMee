@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Company {
   _id: string;
@@ -112,6 +113,17 @@ export default function PostJobPage() {
     }
   };
 
+  if (loading)
+              return (
+                <>
+                  <Header />
+                  <div className="min-h-screen bg-white grid place-items-center text-lg">
+                    <Loader />
+                  </div>
+                  <Footer />
+                </>
+              );
+
   return (
     <>
       <Header />
@@ -123,9 +135,7 @@ export default function PostJobPage() {
             Post a Job
           </h1>
 
-          {loading && (
-            <p className="text-center text-gray-500">Loading companies…</p>
-          )}
+          
 
           {!loading && (
             <>

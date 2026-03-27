@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useAuth } from "@/context/AuthContext";
+import Loader from "@/components/loader";
+
+
+
 
 interface ProfileFormData {
   fullname: string;
@@ -24,7 +28,8 @@ export default function ProfilePage() {
   });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { updateUser } = useAuth();
+  const { user, updateUser } = useAuth();
+  
 
   //  Fetch profile data
   useEffect(() => {
@@ -57,6 +62,10 @@ export default function ProfilePage() {
 
     fetchProfile();
   }, [router]);
+
+  if (!user) {
+  return null; 
+}
 
   // Handle input
   const handleChange = (
@@ -95,9 +104,21 @@ export default function ProfilePage() {
       setLoading(false);
     }
   };
+  if (loading)
+      return (
+        <>
+          <Header />
+          <div className="min-h-screen bg-white grid place-items-center text-lg">
+            <Loader />
+          </div>
+          <Footer />
+        </>
+      );
 
   return (
     <>
+
+    
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-200 via-white to-pink-200 px-4 py-10">
       <Header/>
       <div className="w-full max-w-2xl mt-24 sm:mt-10 md:mt-10 lg:mt-10 bg-white rounded-3xl shadow-2xl p-8 md:p-10 border border-pink-100">
@@ -151,6 +172,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Bio */}
+           {user.role === "student" && (
           <div>
             <label className="block text-gray-700 font-semibold mb-2">
               Bio
@@ -162,8 +184,11 @@ export default function ProfilePage() {
               className="w-full border border-blue-200 rounded-xl px-4 py-3 h-24 resize-none focus:ring-2 focus:ring-pink-400 outline-none transition-all"
             />
           </div>
+           )}
+           
 
           {/* Skills */}
+            {user.role === "student" && (
           <div>
             <label className="block text-gray-700 font-semibold mb-2">
               Skills (comma separated)
@@ -176,6 +201,7 @@ export default function ProfilePage() {
               className="w-full border border-blue-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-pink-400 outline-none transition-all"
             />
           </div>
+           )}
 
           {message && (
             <p
@@ -190,7 +216,7 @@ export default function ProfilePage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-pink-500 to-blue-500 text-white py-3 rounded-xl font-semibold shadow-lg hover:opacity-90 transition-all"
+            className="w-full bg-linear-to-r from-pink-500 to-blue-500 text-white py-3 rounded-xl font-semibold shadow-lg hover:opacity-90 transition-all"
           >
             {loading ? "Updating..." : "Update Profile"}
           </button>

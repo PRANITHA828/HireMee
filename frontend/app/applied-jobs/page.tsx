@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Company {
   _id: string;
@@ -47,15 +48,15 @@ export default function Page() {
   }, []);
 
   if (loading)
-    return (
-      <>
-        <Header />
-        <div className="min-h-screen grid place-items-center text-lg">
-          Loading applied jobs...
-        </div>
-        <Footer />
-      </>
-    );
+      return (
+        <>
+          <Header />
+          <div className="min-h-screen bg-white grid place-items-center text-lg">
+            <Loader />
+          </div>
+          <Footer />
+        </>
+      );
 
   return (
     <>

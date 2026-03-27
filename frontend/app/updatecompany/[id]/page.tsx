@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Company {
   name: string;
@@ -96,7 +97,7 @@ export default function UpdateCompanyPage() {
 
       setMessage("Company updated successfully!");
       setTimeout(() => {
-      router.push(`/company/${id}`);
+      router.push(`/recruiter/company/${id}`);
     }, 800);
     } catch (err) {
       setMessage("Network error");
@@ -104,6 +105,17 @@ export default function UpdateCompanyPage() {
       setSaving(false);
     }
   };
+
+  if (loading)
+              return (
+                <>
+                  <Header />
+                  <div className="min-h-screen bg-white grid place-items-center text-lg">
+                    <Loader />
+                  </div>
+                  <Footer />
+                </>
+              );
 
   return (
     <>
@@ -113,9 +125,7 @@ export default function UpdateCompanyPage() {
         <div className="max-w-3xl mx-auto bg-white border rounded-2xl shadow-xl p-8 space-y-8">
 
           {/* LOADING */}
-          {loading && (
-            <p className="text-center text-gray-500">Loading company...</p>
-          )}
+          
 
           {/* ERROR */}
           {!loading && !company && (

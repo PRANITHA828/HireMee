@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { useRouter } from "next/navigation";
-import { Loader2, Mail, Phone, User as UserIcon, FileText } from "lucide-react";
+import { Loader2, Mail, Phone, User as UserIcon, FileText, Loader } from "lucide-react";
 
 /* ================= TYPES ================= */
 
@@ -24,7 +24,7 @@ interface User {
   profile?: UserProfile;
 }
 
-interface AuthContextType {
+ interface AuthContextType {
   user: User | null;
   loading: boolean;
 }
@@ -59,11 +59,22 @@ export default function ProfilePage() {
     );
   }
 
+  if (loading)
+      return (
+        <>
+          <Header />
+          <div className="min-h-screen bg-white grid place-items-center text-lg">
+            <Loader />
+          </div>
+          <Footer />
+        </>
+      );
+      
   return (
     <>
       <Header />
 
-      <div className="bg-gray-50 min-h-screen py-10">
+      <div className="bg-gray-50 min-h-screen py-30">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
 
@@ -123,6 +134,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* BIO & SKILLS */}
+                {user.role === "student" && (
                 <div className="space-y-6">
                   <div className="bg-gray-50 p-6 rounded-lg">
                     <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -148,7 +160,7 @@ export default function ProfilePage() {
                   </div>
 
                   {/* RESUME */}
-                  {user.role === "student" && (
+                  
                     <div className="bg-gray-50 p-6 rounded-lg">
                       <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                         <FileText size={20} /> Resume
@@ -168,9 +180,9 @@ export default function ProfilePage() {
                         </p>
                       )}
                     </div>
-                  )}
+                 
                 </div>
-
+ )}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Job {
   _id: string;
@@ -63,9 +64,9 @@ export default function AdminJobsPage() {
           
           {/* STATES */}
           {loading && (
-            <p className="text-center text-gray-500">
-              Loading jobs…
-            </p>
+           
+              <Loader/>
+          
           )}
 
           {!loading && error && (
@@ -82,7 +83,7 @@ export default function AdminJobsPage() {
 
           {/* JOB LIST */}
           {!loading && jobs.length > 0 && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3  gap-6">
               {jobs.map((job) => (
                 <div
                   key={job._id}
@@ -104,13 +105,13 @@ export default function AdminJobsPage() {
                     <span className="bg-pink-100 text-pink-600 px-3 py-1 rounded-full">
                       {job.jobType}
                     </span>
-                    <span className="bg-blue-100 text-blue-500 px-3 py-1 rounded-full">
+                    <span className="bg-blue-200 text-gray-800 px-3 py-1 rounded-full">
                       ₹{job.salary}/mo
                     </span>
-                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                    <span className="bg-pink-100 text-pink-600 px-3 py-1 rounded-full">
                       {job.experience} yrs
                     </span>
-                    <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full">
+                    <span className="bg-blue-200 text-gray-800 px-3 py-1 rounded-full">
                       {job.positions} openings
                     </span>
                   </div>
@@ -124,17 +125,19 @@ export default function AdminJobsPage() {
                   </div>
 
                   {/* ACTION */}
+                  <div className="flex justify-center">
                   <button
                     onClick={() =>
-                      router.push(`/applicants/${job._id}`)
+                      router.push(`/recruiter/applicants/${job._id}`)
                     }
-                    className="w-full rounded-full border-2 border-pink-600
+                    className="w-56 rounded-full border-2 border-pink-600
                     text-pink-600 font-semibold py-2 text-sm
                     transition-all duration-300
                     hover:bg-pink-600 hover:text-white"
                   > 
                     View Applicants
                   </button>
+                  </div>
                 </div>
               ))}
             </div>

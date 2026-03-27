@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Loader from "@/components/loader";
 
 interface Company {
   _id: string;
@@ -45,8 +46,8 @@ export default function Page() {
     return (
       <>
         <Header />
-        <div className="min-h-screen grid place-items-center text-lg">
-          Loading companies...
+        <div className="min-h-screen bg-white grid place-items-center text-lg">
+          <Loader />
         </div>
         <Footer />
       </>
@@ -66,7 +67,7 @@ export default function Page() {
       {companies.map((company) => (
         <div
           key={company._id}
-                onClick={() => router.push(`/company/${company._id}`)}
+                onClick={() => router.push(`/recruiter/company/${company._id}`)}
           className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
         >
           {/* Logo */}
@@ -105,7 +106,7 @@ export default function Page() {
   <button
     onClick={(e) => {
       e.stopPropagation();
-      router.push(`/company/${company._id}`);
+      router.push(`/recruiter/company/${company._id}`);
     }}
     className="flex-1 rounded-full border-2 border-pink-500 text-pink-600 font-semibold py-2 text-sm
       transition-all duration-300

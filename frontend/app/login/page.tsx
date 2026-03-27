@@ -61,7 +61,7 @@ export default function LoginPage() {
       if (data.user.role === "recruiter") {
         router.replace("/companies");
       } else {
-        router.replace("/homee");
+        router.replace("/home");
       }
     } catch (err: unknown) {
       const message =

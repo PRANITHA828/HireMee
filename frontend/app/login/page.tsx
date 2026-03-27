@@ -59,7 +59,7 @@ export default function LoginPage() {
 
      console.log("Redirect code reached");
       if (data.user.role === "recruiter") {
-        router.replace("/companies");
+        router.replace("/recruiter/companies");
       } else {
         router.replace("/home");
       }

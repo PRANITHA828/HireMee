@@ -91,7 +91,16 @@ export default function JobApplicantsPage() {
       setUpdatingId(null);
     }
   };
-
+if (loading)
+    return (
+      <>
+        <Header />
+        <div className="min-h-screen bg-white grid place-items-center text-lg">
+          <Loader />
+        </div>
+        <Footer />
+      </>
+    );
   
 
   return (

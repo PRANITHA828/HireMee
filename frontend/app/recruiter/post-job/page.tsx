@@ -103,7 +103,7 @@ export default function PostJobPage() {
       setMessage("Job posted successfully!");
 
       setTimeout(() => {
-        router.push(`/company/${form.companyId}`);
+        router.push(`/recruiter/company/${form.companyId}`);
       }, 800);
 
     } catch {

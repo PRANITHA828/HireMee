@@ -24,7 +24,7 @@ export default function Header() {
     setSidebarOpen(false);
   };
 
-  // ❌ Hide header on auth pages
+  //  Hide header on auth pages
   if (pathname === "/login" || pathname === "/register") return null;
 
   return (

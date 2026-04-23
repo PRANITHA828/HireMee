@@ -11,6 +11,11 @@ interface Applicant {
   fullname: string;
   email: string;
   phoneNumber: number;
+  role: string;
+  profile?: {
+    profilePhoto?: string;
+    skills?: string[];
+  };
 }
 
 interface Application {
@@ -27,12 +32,15 @@ interface Job {
 }
 
 export default function JobApplicantsPage() {
-  // ✅ MUST match folder name: [id]
+  //  MUST match folder name: [id]
   const { id } = useParams<{ id: string }>();
 
   const [job, setJob] = useState<Job | null>(null);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+
+  const [selectedApplicant, setSelectedApplicant] =
+  useState<Application | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -141,6 +149,7 @@ if (loading)
               {job.applications.map((app) => (
                 <div
                   key={app._id}
+                   onClick={() => setSelectedApplicant(app)}
                   className="bg-white border rounded-xl p-6
                   flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
                 >
@@ -209,6 +218,71 @@ if (loading)
             </div>
           )}
         </div>
+        {selectedApplicant && (
+  <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
+    <div className="bg-white rounded-2xl p-6 w-full max-w-lg relative shadow-2xl">
+
+      <button
+        onClick={() => setSelectedApplicant(null)}
+        className="absolute top-3 right-4 text-xl"
+      >
+        ✕
+      </button>
+
+      <div className="text-center">
+        <img
+          src={
+            selectedApplicant.applicant.profile?.profilePhoto ||
+                      "https://res.cloudinary.com/dcika1gku/image/upload/v1761887775/b9adb2c0c4adfa52f4c68afb4a7a8cc7_p4dent.jpg"
+          }
+          className="w-24 h-24 rounded-full mx-auto object-cover border"
+          alt="profile"
+        />
+
+        <h2 className="text-2xl font-bold mt-4">
+          {selectedApplicant.applicant.fullname}
+        </h2>
+
+        <p className="text-gray-500">
+          {selectedApplicant.applicant.email}
+        </p>
+
+        <p className="text-gray-500 mt-1">
+          📞 {selectedApplicant.applicant.phoneNumber}
+        </p>
+
+        <p className="mt-2 capitalize text-sm text-pink-600 font-semibold">
+          {selectedApplicant.applicant.role}
+        </p>
+
+        {/* Skills */}
+        <div className="mt-5">
+          <h3 className="font-semibold mb-2">Skills</h3>
+
+          <div className="flex flex-wrap gap-2 justify-center">
+            {selectedApplicant.applicant.profile?.skills?.length ? (
+              selectedApplicant.applicant.profile.skills.map((skill, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm"
+                >
+                  {skill}
+                </span>
+              ))
+            ) : (
+              <p className="text-gray-400 text-sm">No skills added</p>
+            )}
+          </div>
+        </div>
+
+        {/* Status */}
+        <p className="mt-5 font-semibold">
+          Status: {selectedApplicant.status}
+        </p>
+      </div>
+    </div>
+  </div>
+)}
       </main>
 
       <Footer />
